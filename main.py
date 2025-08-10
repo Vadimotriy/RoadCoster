@@ -19,12 +19,19 @@ if __name__ == '__main__':
                     data = Prices(price=road_price)
                     session.add(data)
                     session.commit()
-                    print(f"Итоговая сумма: {get_total_price(session)}")
+                    print(f"\nИтоговая сумма: {get_total_price(session)} руб.")
                     break
             break
 
         elif action == "2":
-            pass
+            print("\n----------------------------------")
+
+            prices = session.query(Prices).all()
+            for i in prices:
+                print(f"{i.time} --- {i.price} руб.")
+            print("----------------------------------")
+            print(f"\nИтоговая сумма: {get_total_price(session)} руб.")
+            break
 
         else:
             if action.isdigit(): print("Нет такого варианта!", end=" ")
